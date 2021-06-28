@@ -1,0 +1,16 @@
+struct Node* reverseList(struct Node *head)
+    {
+        // prev to point to previous node of the current
+        // next to point to next node of the current
+        Node *prev=NULL, *next;
+        while(head)
+        {
+            next=head->next;  //storing next ode address
+            head->next=prev;  //updating pointer variable of the node
+            prev=head;   //update prev
+            head=next;   //mopve to next node
+        }
+        // at last the hrad will point to NULL
+        //prev will point to head of the reversed linked list
+        return prev;  
+    }
