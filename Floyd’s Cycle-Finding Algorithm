@@ -1,0 +1,27 @@
+// Floyd’s Cycle-Finding Algorithm 
+
+bool detectLoop(Node* head)
+{
+    if(head==NULL)
+        return false;
+    else
+    {
+        // Declare two pointers to one is slow and other is fast
+        Node *slow=head, *fast=head;
+        // if there is a cycle then at some point slow and fast point to same node
+        // if not then loop will break in between
+        while(slow && fast && fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next;
+            if(fast->next!=NULL)
+                fast=fast->next;
+            if(slow==fast)   // Checking if 'slow' is equal to 'fast'
+                return true;
+        }
+        // return false if loop breaks
+        return false;
+    }
+}
+Time Complexity  : O(n)
+Space Complexity : O(1)
