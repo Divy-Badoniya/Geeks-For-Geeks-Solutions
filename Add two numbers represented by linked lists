@@ -1,0 +1,63 @@
+struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        int sum, carry=0;
+        Node *ans=NULL;  // Pointer to repesrent sum of the lists as linked list
+        // reversig the two given lists
+        first=reverse(first);
+        second=reverse(second);
+        // traversing the lists till one of them is completed
+        while(first and second)
+        {
+            sum=first->data+second->data+carry;
+            carry=sum/10;    
+            Node *temp = new Node(sum%10);
+            if(ans==NULL)
+            {
+                ans=temp;
+            }
+            else
+            {
+                temp->next=ans;
+                ans=temp;
+            }
+            first=first->next;
+            second=second->next;
+        }
+        Node *trav = first==NULL ? second : first;  //Selectig Non empty list
+        // traveersing and adding nodes to the ans
+        while(trav)
+        {
+            sum=trav->data+carry;
+            carry=sum/10;
+            Node *temp = new Node(sum%10);
+            if(ans==NULL)
+            {
+                ans=temp;
+            }
+            else
+            {
+                temp->next=ans;
+                ans=temp;
+            }
+            trav=trav->next;
+        }
+        // Checking if carry at the end is zero or not
+        // if not then add one more node at the end;
+        if(carry)
+        {
+            Node *temp = new Node(carry);
+            if(ans==NULL)
+            {
+                ans=temp;
+            }
+            else
+            {
+                temp->next=ans;
+                ans=temp;
+            }
+        }
+        // return ans
+        return ans;
+    }
+Time Complexity  : O(N+M)
+Space Complexity : O(N+M)   // For the ans to be stored
