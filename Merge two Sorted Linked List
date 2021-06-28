@@ -1,0 +1,21 @@
+Node* SortedMerge(Node* node1, Node* node2)
+{
+    Node* result = NULL;  
+    if (node1 == NULL)  
+        return(node2);  
+    else if (node2 == NULL)  
+        return(node1);  
+    if (node1->data <= node2->data)  
+    {  
+        result = node1;  
+        result->next = SortedMerge(node1->next, node2);  
+    }  
+    else
+    {  
+        result = node2;  
+        result->next = SortedMerge(node1, node2->next);  
+    }  
+    return(result);
+}
+Time Complexity  : O(N+M)
+Space Complexity : O(N+M)   For recursive traversal
