@@ -1,0 +1,43 @@
+Node *sortedInsert(Node* head, int data)
+    {
+        //Your code here
+        Node *temp=new Node(data);
+        if(head==NULL)
+        {
+            temp->next=temp;
+            return temp;
+        }
+        int flag=0;
+        Node *curr=head, *prev=NULL, *found;
+        do
+        {
+            if(curr->data >= temp->data)
+            {
+                if(flag==0)
+                    found=prev;
+                else
+                {
+                    prev=curr;
+                    curr=curr->next;
+                    continue;
+                }
+                flag=1;
+            }
+            prev=curr;
+            curr=curr->next;
+        }while(curr!=head);
+        if(found==NULL)
+        {
+            prev->next=temp;
+            temp->next=head;
+            return temp;
+        }
+        else
+        {
+            temp->next=found->next;
+            found->next=temp;
+            return head;
+        }
+    }
+Time Complexity  : O(n)
+Space Complexity : O(1)
