@@ -14,3 +14,6 @@ struct Node* reverseList(struct Node *head)
         //prev will point to head of the reversed linked list
         return prev;  
     }
+
+Time Complexity  : O(n)
+Space Complexity : O(1)
