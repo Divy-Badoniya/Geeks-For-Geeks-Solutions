@@ -1,0 +1,25 @@
+Node* addOne(Node *head) 
+{
+    // return head of list after adding one
+    Node *R = reverse(head);  // Reverse the list
+    Node *curr=R;   //pointer for the traversal
+    while(curr!=NULL)
+    {
+        curr->data=((curr->data+1)%10);   //updating the value of the node
+        // Break the loop if modified data is not zero
+        if(curr->data!=0)
+            break;
+        curr=curr->next;
+    }
+    head=reverse(R);   //reversing the result
+    // Adding one extra node to the list if data of the head is zero
+    if(head->data==0)
+    {
+        Node *temp = new Node(1);
+        temp->next=head;
+        head=temp;
+    }
+    return head;
+}
+Time Complexity  : O(n)-average case  O(1)-Best Case(last digit is not '9')
+Space Complexity : O(1)
