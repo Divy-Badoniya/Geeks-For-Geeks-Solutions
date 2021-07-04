@@ -1,0 +1,23 @@
+struct node *reverse (struct node *head, int k)
+{ 
+    // Complete this method
+    if(head==NULL)
+        return NULL;
+    int i=0;
+    node *last=NULL;
+    node *curr=head, *prev=NULL, *next=NULL;
+    while(curr!=NULL && i<k)
+    {
+        next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+        i++;
+    }
+    if(next!=NULL)
+        head->next=reverse(next, k);
+    return prev;
+}
+
+Time Complexity  : O(n)
+Space Complexity : O(1)
