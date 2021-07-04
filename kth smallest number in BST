@@ -1,0 +1,27 @@
+void util_func(Node *root, int &k, int &kthsmall)
+    {
+        if(root==NULL)
+            return;
+        util_func(root->left, k, kthsmall);
+        if(k>0)
+        {
+            k--;
+            kthsmall=root->data;
+        }
+        else
+            return;
+        util_func(root->right, k, kthsmall);
+    }
+    int KthSmallestElement(Node *root, int K)
+    {
+        //add code here.
+        int kthsmall;
+        util_func(root, K, kthsmall);
+        if(K!=0)
+            return -1;
+        else 
+            return kthsmall;
+    }
+    
+    Time Complexity  : O(n)
+    Space Complexity : O(1)
