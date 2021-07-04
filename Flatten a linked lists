@@ -1,0 +1,48 @@
+/*  
+  struct Node{
+	  int data;
+	  struct Node * next;     //To point to right node
+	  struct Node * bottom;   //To point to down list
+	
+	  Node(int x){
+	    data = x;
+	    next = NULL;
+	    bottom = NULL;
+	  }
+};
+*/
+// lists are in sorted order to the down and right
+
+Node* sortedmerge(Node *a, Node *b)
+{
+    if(a==NULL)
+        return b;
+    if(b==NULL)
+        return a;
+    Node *result=NULL;
+    if(a->data < b->data)
+    {
+        result=a;
+        result->bottom=sortedmerge(a->bottom, b);
+    }
+    else
+    {
+        result=b;
+        result->bottom=sortedmerge(a, b->bottom);
+    }
+    return result;
+}
+Node *flatten(Node *root)
+{
+    // Your code here
+    if(root==NULL)
+        return NULL;
+    Node *trav=root->next;
+    while(trav!=NULL)
+    {
+        Node *temp=trav->next;
+        root=sortedmerge(root, trav);
+        trav=temp;
+    }
+    return root;
+}
