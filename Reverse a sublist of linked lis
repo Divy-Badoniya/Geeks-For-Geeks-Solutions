@@ -1,0 +1,50 @@
+    void reverse(Node *head)
+    {
+        Node *prev=NULL, *next=NULL;
+        while(head)
+        {
+            next=head->next;
+            head->next=prev;
+            prev=head;
+            head=next;
+        }
+    }
+    
+    Node* reverseBetween(Node* head, int m, int n)
+    {
+        //code here
+        int i=1;
+        if(head==NULL)
+            return head;
+        Node *first=head, *prev1=NULL, *last=head;
+        while(i<m)
+        {
+            prev1=first;
+            first=first->next;
+            last=last->next;
+            i++;
+        }
+        while(i<n && last)
+        {
+            last=last->next;
+            i++;
+        }
+        if(prev1!=NULL)
+            prev1->next=NULL;
+        Node *rest=NULL;
+        if(last!=NULL)
+        {
+            rest=last->next;
+            last->next=NULL;
+        }
+        reverse(first);
+        first->next=rest;
+        if(prev1==NULL)
+            head=last;
+        else
+            prev1->next=last;
+        return head;
+    }
+    
+    Time Complexity  : O(n)
+    Space Complexity : O(1)
