@@ -1,0 +1,27 @@
+    vector<vector<int> > stockBuySell(vector<int> A, int n){
+        vector<vector<int>> ans;
+        for(int i=1 ; i<n ; i++)
+        {
+            vector<int> v;
+            if(A[i-1] < A[i])          //Element smaller than right element
+            {
+                v.push_back(i-1);      // pushing index of first element
+                i+=1;
+                while(i<n)             // loop to find next largest element
+                {
+                    if(A[i-1]<=A[i])
+                    {
+                        i+=1;
+                    }
+                    else
+                        break;
+                }
+                v.push_back(i-1);      // pushing index of largest element at right 
+                ans.push_back(v); 
+            }
+        }
+        return ans;
+    }
+    
+    Time Complexity  : O(n)
+    Space Complexity : O(n)
