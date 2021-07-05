@@ -1,0 +1,26 @@
+    int findPlatform(int arr[], int dep[], int n)
+    {
+      //Sorting  both arrival and departure in order track record of trains present in station at te same time 
+    	sort(arr, arr+n);
+    	sort(dep, dep+n);      
+    	int train=1, j=0, i=1, pf=1;
+    	while(i<n)
+    	{
+    	    if(arr[i]<=dep[j])
+    	    {
+    	        train++;
+    	        i++;
+    	        if(train>pf)
+    	            pf=train;
+    	    }
+    	    else
+    	    {
+    	        train--;
+    	        j++;
+    	    }
+    	}
+    	return pf;
+    }
+    
+    Time Complexity  : O(n*log(n))
+    Space Complexity : O(n)
