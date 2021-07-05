@@ -1,0 +1,38 @@
+Node* sorted_merge(Node *a,Node *b)
+{
+    if(a==NULL)
+        return b;
+    else if(b==NULL)
+        return a;
+    if(a->data < b->data)
+    {
+        a->next=sorted_merge(a->next, b);
+        a->next->prev=a;
+        return a;
+    }
+    else
+    {
+        b->next=sorted_merge(a, b->next);
+        b->next->prev=b;
+        return b;
+    }
+}
+
+struct Node *sortDoubly(struct Node *head)
+{
+	if(head==NULL || head->next==NULL)
+	    return head;
+	Node *slow=head, *fast=head->next;
+	while(fast!=NULL && fast->next!=NULL)
+	{
+	    slow=slow->next;
+	    fast=fast->next->next;
+	}
+	Node *newhead=slow->next;
+	newhead->prev=NULL;
+	slow->next=NULL;
+	return sorted_merge(sortDoubly(head), sortDoubly(newhead));
+}
+
+Time Complexity  : O(n*log(n))
+Space Complexity : O(log(n))     // Recursive Memory
