@@ -1,0 +1,20 @@
+// A no. can pair wit itself like N=3 then pars=3^2
+
+    int countBits(int N, long long int A[])
+    {
+        // code here
+        long long int k=1000000007;
+        long long int bit[64]={0};
+        for(int i=0 ; i<N ; i++)
+        {
+            for(int j=0 ; j<64 ; j++)
+            {
+                if(A[i] & 1<<j)
+                    bit[j]=(bit[j]+1)%k;
+            }
+        }
+        long long int sum=0;
+        for(int i=0 ; i<64 ; i++)
+            sum=sum%k + ((bit[i]%k))*(((N-bit[i]+k)%k)%k)%k;  // Taking Modulo at each step in order to stop overflow
+        return sum;
+    }
