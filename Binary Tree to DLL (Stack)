@@ -1,0 +1,40 @@
+/* The idea is to use inorder traversal using stack */    
+    void Insert_in_stack(stack<Node*> &s, Node *root)
+    {
+        while(root!=NULL)
+        {
+            s.push(root);
+            root = root->left;
+        }
+    }
+    Node* Insert_in_list(Node *tail, Node *curr)
+    {
+        curr->left=tail;
+        curr->right=NULL;
+        if(tail)
+        {
+            tail->right=curr;
+        }
+        return curr;
+    }
+    Node * bToDLL(Node *root)
+    {
+        if(root==NULL)
+            return NULL;
+        Node *tail=NULL, *head=NULL;
+        stack<Node*> st;
+        Insert_in_stack(st, root);
+        head=st.top();
+        while(!st.empty())
+        {
+            Node *temp=st.top();
+            st.pop();
+            Insert_in_stack(st, temp->right);
+            tail = Insert_in_list(tail, temp);
+        }
+        return head;
+    }
+    
+    Time Complexity  : O(n)
+    Space Complexity : O(h)
+    
